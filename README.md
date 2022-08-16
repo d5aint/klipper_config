@@ -1,4 +1,4 @@
-# ldo-voron-2.4r2
+# LDO Voron-2.4r2
 
 This is my actual config folder for my Voron v2.4 printer.
 
