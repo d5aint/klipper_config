@@ -1,5 +1,0 @@
-camera="usb"
-camera_usb_options="-r 1296x972 -f 10 -d /dev/v4l/by-id/usb-046d_HD_Pro_Webcam_C920_125E4D8F-video-index0"
-camera_http_webroot="./www-mainsail"
-camera_http_options="-n"
-camera_streamer=MJPG-streamer
