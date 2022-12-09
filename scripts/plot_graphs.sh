@@ -3,9 +3,10 @@
 ###### GRAPH PLOTTING SCRIPT ######
 ###################################
 # Written by Frix_x#0161 #
-# @version: 1.3
+# @version: 1.4
 
 # CHANGELOG:
+#   v1.4: added the ~/klipper dir parameter to the call of graph_vibrations.py for a better user handling (in case user is not "pi")
 #   v1.3: some documentation improvement regarding the line endings that needs to be LF for this file
 #   v1.2: added the movement name to be transfered to the Python script in vibration calibration (to print it on the result graphs)
 #   v1.1: multiple fixes and tweaks (mainly to avoid having empty files read by the python scripts after the mv command)
@@ -81,7 +82,7 @@ function plot_vibr_graph {
   done <<< "$(find /tmp -type f -name "adxl345-*.csv" 2>&1 | grep -v "Permission")"
   
   sync && sleep 2
-  "${generator}" "${isf}"/vibrations/vibr_"${date_ext}"*.csv -o "${isf}"/vibrations/vibrations_"${date_ext}".png -a "$1"
+  "${generator}" "${isf}"/vibrations/vibr_"${date_ext}"*.csv -o "${isf}"/vibrations/vibrations_"${date_ext}".png -a "$1" -k "${KLIPPER_FOLDER}"
   
   tar cfz "${isf}"/vibrations/vibrations_"${date_ext}".tar.gz "${isf}"/vibrations/vibr_"${date_ext}"*.csv
   rm "${isf}"/vibrations/vibr_"${date_ext}"*.csv
