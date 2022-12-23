@@ -247,7 +247,7 @@ def main():
     fig.set_size_inches(10, 10)
     fig.tight_layout()
     fig.subplots_adjust(top=0.92)
-    
+
     fig.savefig(options.output)
 
 if __name__ == '__main__':
