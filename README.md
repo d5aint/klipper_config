@@ -49,6 +49,9 @@ The macro ```PRINT_START``` is dedicated to prepare the machine to print:
 
 #### Required/Used Items
 https://github.com/d5aint/kiauh
+
 https://github.com/protoloft/klipper_z_calibration
+
 https://github.com/moggieuk/ERCF-Software-V3
+
 https://github.com/Frix-x/klipper-voron-V2
