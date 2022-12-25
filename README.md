@@ -45,3 +45,10 @@ The macro ```PRINT_START``` is dedicated to prepare the machine to print:
 3. When the bed and chamber are at temperature, the machine goes for a quad gantry leveling, a purge of the hotend/nozzle, cleaning of the nozzle tip and auto Z calibration.
 4. Then the macro applies custom material parameters like PA, nevermore filtering, retraction settings, etc...
 5. At the end, an adaptive bed mesh is recorded before starting the print.
+
+
+#### Required/Used Items
+https://github.com/d5aint/kiauh
+https://github.com/protoloft/klipper_z_calibration
+https://github.com/moggieuk/ERCF-Software-V3
+https://github.com/Frix-x/klipper-voron-V2
