@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export $(grep -v '^#' ~/.gh_token | xargs -0)
+export $(grep -v '^#' /home/pi/.gh_token | xargs -0)
 
 #####################################################################
 ### Please set the paths accordingly. In case you don't have all  ###
