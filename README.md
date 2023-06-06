@@ -7,12 +7,14 @@ This is the automated backups of my WIP config that I run on my Voron 2.4r2 300m
 - [Stealthburner with Clockwork 2](https://vorondesign.com/voron_stealthburner)
 - [Voron Revo](https://e3d-online.com/products/revo-voron)
 - [Voron TAP](https://github.com/VoronDesign/Voron-Tap)
+- [3DO Nozzle Camera](https://github.com/3DO-EU/nozzle-camera#3do-nozzle-camera)
 - [EBB SB2240 CAN](https://github.com/bigtreetech/EBB#ebb-sb2240_2209-can-v10)
 - [Ocotpus Max](https://github.com/bigtreetech/Octopus-Max-EZ)
 - [Kinematics Mount](https://github.com/tanaes/whopping_Voron_mods/tree/main/kinematic_bed)
 - [Nozzle Scrubber](https://github.com/VoronDesign/VoronUsers/tree/master/printer_mods/edwardyeeks/Decontaminator_Purge_Bucket_&_Nozzle_Scrubber)
 - [ERCF](https://github.com/EtteGit/EnragedRabbitProject) - Using Octopus Max board not ERCF EASY BRD
 - [ERCF-Software-V3 "Happy Hare"](https://github.com/moggieuk/ERCF-Software-V3)
+- [Sensorless Homing](https://docs.vorondesign.com/community/howto/clee/sensorless_xy_homing.html)
 - [Adaptive Bed Mesh](https://github.com/Frix-x/klippain/blob/main/docs/features/adaptive_bed_mesh.md)
 
 ## Specific features & config
