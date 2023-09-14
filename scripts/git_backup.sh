@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export $(grep -v '^#' ~/.gh_token | xargs -0)
+##export $(grep -v '^#' ~/.gh_token | xargs -0)
 
 #####################################################################
 ### Please set the paths accordingly. In case you don't have all  ###
@@ -61,7 +61,7 @@ grab_version(){
 
 push_config(){
   cd $config_folder
-  echo Pushing updates
+  ##echo Pushing updates
   git pull -v
   git add . -v
   current_date=$(date +"%Y-%m-%d %T")
