@@ -1,9 +1,12 @@
-# Voron 2.4r2 by LDO
-This is the automated backups of my WIP config that I run on my Voron 2.4r2 300mm.
+### Voron Klipper Backup
+This is the automated backups of my klipper config
 
-# Features
+Voron 2.4r2 300mm by LDO
+
+### Features
 - [Pin Mod](https://github.com/hartk1213/MISC/tree/main/Voron%20Mods/Voron%202-Trident/2.4/Voron2.4_Trident_Pins_Mod)
 - [GE5C](https://github.com/VoronDesign/VoronUsers/tree/master/printer_mods/hartk1213/Voron2.4_GE5C)
+- [Filament Latch 2020 Extrusion](https://www.printables.com/model/172368-voron-24-filament-latch-or-any-2020-extrusion)
 - [Stealthburner with Clockwork 2](https://vorondesign.com/voron_stealthburner)
 - [Voron Revo](https://e3d-online.com/products/revo-voron)
 - [Voron TAP](https://github.com/VoronDesign/Voron-Tap)
@@ -16,8 +19,10 @@ This is the automated backups of my WIP config that I run on my Voron 2.4r2 300m
 - [ERCF-Software-V3 "Happy Hare"](https://github.com/moggieuk/ERCF-Software-V3)
 - [Sensorless Homing](https://docs.vorondesign.com/community/howto/clee/sensorless_xy_homing.html)
 - [Adaptive Bed Mesh](https://github.com/Frix-x/klippain/blob/main/docs/features/adaptive_bed_mesh.md)
+- [Git backup](https://github.com/th33xitus/kiauh/wiki/How-to-autocommit-config-changes-to-github%3F) - using [SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) authentication
 
-## Specific features & config
+
+### Specific features & config
 
 Config is divided in two folders : one for the hardware declarations and the other for all the macros. In these folders I tried to put everything in files to be able to find and modify everything easily.
 
@@ -46,4 +51,32 @@ The macro ```PRINT_START``` is dedicated to prepare the machine to print:
 4. Then the macro applies custom material parameters like PA, nevermore filtering, retraction settings, etc...
 5. At the end, an adaptive bed mesh is recorded before starting the print.
 
-## Disclaimer: Usage of this printer config happens at your own risk!
+# Disclaimer: Usage of this printer config happens at your own risk!
+
+
+### Links
+#### Main mod repos
+- [Voron User Mods](https://github.com/VoronDesign/VoronUsers/tree/master/printer_mods)
+- [https://voronregistry.com/mods](https://voronregistry.com/mods) - Also nice website for same by discord:exceptionptr
+- [https://vorondesign.com/](https://vorondesign.com/)
+
+#### Software
+- [Klipper](https://www.klipper3d.org/)
+- [Mainsail](https://docs.mainsail.xyz/)
+- [KlipperScreen](https://klipperscreen.readthedocs.io/en/latest/)
+- [Crowsnest](https://github.com/mainsail-crew/crowsnest)
+
+#### Hardware
+- [BTT Ocotpus Max EZ](https://github.com/bigtreetech/Octopus-Max-EZ)
+- [BTT EBB SB2240](https://github.com/bigtreetech/EBB#ebb-sb2240_2209-can-v10)
+
+#### Misc
+- [Ellis' SuperSlicer Profiles](https://github.com/AndrewEllis93/Ellis-SuperSlicer-Profiles)
+- [Ellis' Print Tuning Guide](https://ellis3dp.com/Print-Tuning-Guide/)
+
+#### Other klipper backups
+- [https://github.com/AndrewEllis93/v2.247_backup_klipper_config](https://github.com/AndrewEllis93/v2.247_backup_klipper_config)
+- [https://github.com/richardjm/voronpi-klipper-backup](https://github.com/richardjm/voronpi-klipper-backup)
+- [https://github.com/zellneralex/klipper_config](https://github.com/zellneralex/klipper_config)
+- [https://github.com/rootiest/zippy-klipper_config](https://github.com/rootiest/zippy-klipper_config)
+- [https://github.com/Frix-x/klippain](https://github.com/Frix-x/klippain)
