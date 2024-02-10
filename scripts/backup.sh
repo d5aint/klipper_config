@@ -15,6 +15,7 @@ ECHO=/bin/echo
 MKDIR=/bin/mkdir
 MV=/bin/mv
 RM=/bin/rm
+SUDO=/usr/bin/sudo
 TAR=/usr/bin/tar
 
 DOW=`$DATE +%a`
@@ -35,7 +36,7 @@ else
 fi
 
 if [ "$DOM" = "01" -o $DOFULL = "true" ] ; then
-    ## Full Backup
+   ## Full Backup
    $TAR -czf $BKDIR/work/${DATE}_FULL.tgz $EXCLUDE $DATA
    if [ -f $BKDIR/work/${DATE}_FULL.tgz ] ; then
       $MV $BKDIR/work/${DATE}_FULL.tgz $BKDIR/${DATE}_FULL.tgz
