@@ -89,7 +89,7 @@ def print_system_info():
 
 
     date_time = future_date_time.result()
-    print(f"Klippain started ({date_time})")
+    print(f"System boot time ({date_time})")
 
     sysname, release, machine = future_os_kernel.result()
     print(f"Operating System: {sysname} - {release}")
