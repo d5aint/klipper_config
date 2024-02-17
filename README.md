@@ -1,6 +1,6 @@
 ### Voron Klipper Backup
-##This is the automated backups of my klipper config
-##Disclaimer: Usage of this printer config happens at your own risk!
+## This is the automated backups of my klipper config
+## Disclaimer: Usage of this printer config happens at your own risk!
 
 Voron 2.4r2 300mm by LDO
 
