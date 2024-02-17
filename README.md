@@ -20,7 +20,6 @@
 ### Links
 #### Main mod repos
 - [Voron User Mods](https://github.com/VoronDesign/VoronUsers/tree/master/printer_mods)
-- [Voron User Mods Registry](https://voronregistry.com/mods) - Also nice website for same by discord:exceptionptr
 - [Voron Design](https://vorondesign.com/)
 - [Katapult aka CanBoot](https://github.com/Arksine/katapult)
 
