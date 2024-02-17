@@ -1,9 +1,7 @@
-### Voron Klipper Backup
-## This is the automated backups of my klipper config
+## This repository is used for automated backups of my klipper config.
 ## Disclaimer: Usage of this printer config happens at your own risk!
 
-Voron 2.4r2 300mm by LDO
-
+### Voron 2.4r2 300mm by LDO
 ### Features
 - [Pin Mod](https://github.com/hartk1213/MISC/tree/main/Voron%20Mods/Voron%202-Trident/2.4/Voron2.4_Trident_Pins_Mod)
 - [GE5C](https://github.com/VoronDesign/VoronUsers/tree/master/printer_mods/hartk1213/Voron2.4_GE5C)
