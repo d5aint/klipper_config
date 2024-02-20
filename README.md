@@ -1,8 +1,8 @@
-## This repository is used for automated backups of my klipper config.
-## Disclaimer: Usage of this printer config happens at your own risk!
+#### This repository is used for automated backups of my klipper config.
+#### Disclaimer: Usage of this printer config happens at your own risk!
 
-### Voron 2.4r2 300mm by LDO
-### Features
+#### Voron 2.4r2 300mm by LDO
+#### Features
 - [Pin Mod](https://github.com/hartk1213/MISC/tree/main/Voron%20Mods/Voron%202-Trident/2.4/Voron2.4_Trident_Pins_Mod)
 - [GE5C](https://github.com/VoronDesign/VoronUsers/tree/master/printer_mods/hartk1213/Voron2.4_GE5C)
 - [Filament Latch 2020 Extrusion](https://www.printables.com/model/172368-voron-24-filament-latch-or-any-2020-extrusion)
@@ -17,7 +17,7 @@
 - [ERCFv2](https://github.com/Enraged-Rabbit-Community/ERCF_v2)
 
 
-### Links
+#### Links
 #### Main mod repos
 - [Voron User Mods](https://github.com/VoronDesign/VoronUsers/tree/master/printer_mods)
 - [Voron Design](https://vorondesign.com/)
