@@ -2,9 +2,10 @@
 #
 # creates backups of essential files
 #
-BKDIR="/home/pi/printer_data/config/BackUps"
+BKDIR="${HOME}/BackUps"
 DATA="/home/pi"
-EXCLUDE="--exclude=/home/pi/BackUps --exclude=/home/pi/NoBackUp --exclude=/home/pi/printer_data/config/BackUps --exclude=*tgz --exclude=*sock"
+PRINTER="/home/pi/printer_data/config/BackUps"
+EXCLUDE="--exclude=/home/pi/BackUps --exclude=/home/pi/NoBackUp --exclude=*tgz --exclude=*sock"
 
 BASENAME=/usr/bin/basename
 CAT=/bin/cat
@@ -20,38 +21,31 @@ TAR=/usr/bin/tar
 
 DOW=`$DATE +%a`
 DOM=`$DATE +%d`
-DATE=`date +"%Y-%m-%d"`
-NOW=`date +"%Y-%m-%d %X"`
+DATE=`$DATE +"%Y-%m-%d"`
+NOW=`$DATE +"%Y-%m-%d %X"`
 
-$MKDIR -p $BKDIR/work/db
-
-if [ -z $1 ] ; then
-    DOFULL="false"
-else
-    if [ $1 = "full" ] ; then
-        DOFULL="true"
-    else
-        DOFULL="false"
-    fi
+if [ ! -d $BKDIR/work/db ]; then
+	$MKDIR -p $BKDIR/work/db
 fi
 
-if [ "$DOM" = "01" -o $DOFULL = "true" ] ; then
-   ## Full Backup
-   $TAR -czf $BKDIR/work/${DATE}_FULL.tgz $EXCLUDE $DATA
-   if [ -f $BKDIR/work/${DATE}_FULL.tgz ] ; then
-      $MV $BKDIR/work/${DATE}_FULL.tgz $BKDIR/${DATE}_FULL.tgz
-      $ECHO "$NOW" > $BKDIR/last_full
-      $CHMOD 640 $BKDIR/last_full
-      $RM -f $BKDIR/*DIFF.tgz*
-   fi
-else
-   ## Differential Backup
-   NEWER=`$CAT $BKDIR/last_full`
-   $TAR --newer="$NEWER" -czf $BKDIR/work/${DATE}_DIFF.tgz $EXCLUDE $DATA
-   if [ -f $BKDIR/work/${DATE}_DIFF.tgz ] ; then
-      $RM -f $BKDIR/*DIFF.tgz*
-      $MV $BKDIR/work/${DATE}_DIFF.tgz $BKDIR/${DATE}_DIFF.tgz
-   fi
+$TAR -czf $BKDIR/work/${DATE}_KLIPPER_FULL.tgz $EXCLUDE $DATA
+if [ -f $BKDIR/work/${DATE}_KLIPPER_FULL.tgz ] ; then
+	$MV $BKDIR/work/${DATE}_KLIPPER_FULL.tgz $BKDIR/${DATE}_KLIPPER_FULL.tgz
+    $ECHO "$NOW" > $PRINTER/last_full
+    $CHMOD 640 $PRINTER/last_full
 fi
 
+$SUDO $CHOWN pi:pi $BKDIR/*
 $RM -rf $BKDIR/work
+
+if [ -e $PRINTER/*tgz ]; then
+	$RM $PRINTER/*tgz
+fi
+
+if [ -f $BKDIR/${DATE}_* ] ; then
+    for f in $BKDIR/${DATE}_*
+    do
+        BNAME=`$BASENAME $f`
+        $MV $BKDIR/$BNAME $PRINTER/$BNAME
+    done
+fi
