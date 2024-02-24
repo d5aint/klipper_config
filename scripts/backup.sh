@@ -3,9 +3,9 @@
 # creates backups of essential files
 #
 BKDIR="${HOME}/BackUps"
-DATA="/home/pi"
-PRINTER="/home/pi/printer_data/config/BackUps"
-EXCLUDE="--exclude=/home/pi/BackUps --exclude=/home/pi/NoBackUp --exclude=*tgz --exclude=*sock"
+DATA="${HOME}/printer_data"
+PRINTER="${HOME}/printer_data/config/BackUps"
+EXCLUDE="--exclude=*tgz --exclude=*sock --exclude=*bkp"
 
 BASENAME=/usr/bin/basename
 CAT=/bin/cat
@@ -28,24 +28,29 @@ if [ ! -d $BKDIR/work/db ]; then
 	$MKDIR -p $BKDIR/work/db
 fi
 
-$TAR -czf $BKDIR/work/${DATE}_KLIPPER_FULL.tgz $EXCLUDE $DATA
-if [ -f $BKDIR/work/${DATE}_KLIPPER_FULL.tgz ] ; then
-	$MV $BKDIR/work/${DATE}_KLIPPER_FULL.tgz $BKDIR/${DATE}_KLIPPER_FULL.tgz
-    $ECHO "$NOW" > $PRINTER/last_full
-    $CHMOD 640 $PRINTER/last_full
+if [ -e "${HOME}/printer_data/backup/MOONRAKER.DATA" ]; then
+	$RM "${HOME}/printer_data/backup/MOONRAKER.DATA"
+fi
+$HOME/moonraker/scripts/backup-database.sh -o "${HOME}/printer_data/backup/MOONRAKER.DATA"
+
+$TAR -czf "${BKDIR}/work/${DATE}_KLIPPER_FULL.tgz" $EXCLUDE $DATA
+if [ -f "${BKDIR}/work/${DATE}_KLIPPER_FULL.tgz" ] ; then
+	if [ -e $PRINTER/*tgz ]; then
+		$RM $PRINTER/*tgz
+	fi
+	$MV "${BKDIR}/work/${DATE}_KLIPPER_FULL.tgz" "${PRINTER}/${DATE}_KLIPPER_FULL.tgz"
+	$SUDO $CHOWN pi:pi $PRINTER/*
 fi
 
-$SUDO $CHOWN pi:pi $BKDIR/*
 $RM -rf $BKDIR/work
 
-if [ -e $PRINTER/*tgz ]; then
-	$RM $PRINTER/*tgz
-fi
 
-if [ -f $BKDIR/${DATE}_* ] ; then
-    for f in $BKDIR/${DATE}_*
-    do
-        BNAME=`$BASENAME $f`
-        $MV $BKDIR/$BNAME $PRINTER/$BNAME
-    done
+if [ $? -eq 0 ]; then
+	MSG="Printer config backup was successfull."
+	echo "VALUE_UPDATE:status=${MSG}"
+	exit 0
+else
+	MSG="Printer config backup failed!"
+	echo "VALUE_UPDATE:status=${MSG}"
+    exit 1
 fi

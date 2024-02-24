@@ -71,3 +71,13 @@ push_config(){
 
 grab_version
 push_config
+
+if [ $? -eq 0 ]; then
+	MSG="Pushing changes to github was successfull."
+	echo "VALUE_UPDATE:status=${MSG}"
+	exit 0
+else
+	MSG="Push changes to github failed!"
+	echo "VALUE_UPDATE:status=${MSG}"
+    exit 1
+fi

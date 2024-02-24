@@ -83,4 +83,5 @@ if [ "$1" == "check" ]; then
     fi
     
     echo "VALUE_UPDATE:status=${MSG}"
+	exit 0
 fi
