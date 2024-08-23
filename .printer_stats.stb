@@ -1,3 +1,0 @@
-[Variables]
-print_stats = {'time': {'total': 812921, 'service': 812921, 'filter_media': 0, 'filter_hepa': 336814}, 'filament': 1634306.6059202517}
-
