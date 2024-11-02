@@ -1,1 +1,0 @@
-/home/pi/klippain_shaketune/K-ShakeTune/scripts/graph_vibrations.py
