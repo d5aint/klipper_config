@@ -1,83 +1,64 @@
 #!/bin/bash
+# Backs up the Klipper config folder by committing and pushing it to its
+# configured git remote. Meant to be run via Klipper's gcode_shell_command
+# extra - the VALUE_UPDATE:status=... lines are consumed by that extra's
+# value_status option and surfaced back through the printer's status.
+#
+# Usage (from a gcode macro, via RUN_SHELL_COMMAND's PARAMS):
+#   Any arguments passed to this script become extra `-m` commit message
+#   lines, e.g.:
+#     RUN_SHELL_COMMAND CMD=backup_config PARAMS="before tuning run"
+#
+# Override the config path without editing this file via:
+#   BACKUP_CONFIG_FOLDER=/path/to/config ./backup_config.sh
 
-##export $(grep -v '^#' ~/.gh_token | xargs -0)
+set -uo pipefail
 
-#####################################################################
-### Please set the paths accordingly. In case you don't have all  ###
-### the listed folders, just keep that line commented out.        ###
-#####################################################################
-### Path to your config folder you want to backup
-config_folder=/home/pi/printer_data/config
+CONFIG_FOLDER="${BACKUP_CONFIG_FOLDER:-/home/pi/printer_data/config}"
 
-### Path to your Klipper folder, by default that is '~/klipper'
-klipper_folder=~/klipper
-
-### Path to your Moonraker folder, by default that is '~/moonraker'
-moonraker_folder=~/moonraker
-
-### Path to your Mainsail folder, by default that is '~/mainsail'
-mainsail_folder=~/mainsail
-
-### Path to your Fluidd folder, by default that is '~/fluidd'
-#fluidd_folder=~/fluidd
-
-#####################################################################
-#####################################################################
-
-
-#####################################################################
-################ !!! DO NOT EDIT BELOW THIS LINE !!! ################
-#####################################################################
-grab_version(){
-  if [ ! -z "$klipper_folder" ]; then
-    echo -n "klipper version: "
-    cd "$klipper_folder"
-    klipper_commit=$(git rev-parse --short=7 HEAD)
-    m1="Klipper on commit: $klipper_commit"
-    echo $klipper_commit
-    cd ..
-  fi
-  if [ ! -z "$moonraker_folder" ]; then
-    echo -n "moonraker version: "
-    cd "$moonraker_folder"
-    moonraker_commit=$(git rev-parse --short=7 HEAD)
-    m2="Moonraker on commit: $moonraker_commit"
-    echo $moonraker_commit
-    cd ..
-  fi
-  if [ ! -z "$mainsail_folder" ]; then
-    echo -n "mainsail version: "
-    mainsail_ver=$(head -n 1 $mainsail_folder/.version)
-    m3="Mainsail version: $mainsail_ver"
-    echo $mainsail_ver
-  fi
-  if [ ! -z "$fluidd_folder" ]; then
-    echo -n "fluidd version: "
-    fluidd_ver=$(head -n 1 $fluidd_folder/.version)
-    m4="Fluidd version: $fluidd_ver"
-    echo $fluidd_ver
-  fi
+report_status() {
+    echo "VALUE_UPDATE:status=$1"
 }
 
-push_config(){
-  cd $config_folder
-  ##echo Pushing updates
-  git pull -v
-  git add . -v
-  current_date=$(date +"%Y-%m-%d %T")
-  git commit -m "Backup triggered on $current_date" -m "$m1" -m "$m2" -m "$m3" -m "$m4"
-  git push "git@github.com:d5aint/klipper_config.git"
+push_config() {
+    cd "${CONFIG_FOLDER}" || {
+        report_status "Backup failed: could not cd to ${CONFIG_FOLDER}"
+        return 1
+    }
+
+    if ! git pull -v; then
+        report_status "Backup failed: git pull could not update from the remote (check for conflicts)"
+        return 1
+    fi
+
+    git add -A
+
+    if git diff --cached --quiet; then
+        report_status "No config changes to back up"
+        return 0
+    fi
+
+    local commit_date
+    commit_date="$(date +"%Y-%m-%d %T")"
+    local -a message_args=(-m "Backup triggered on ${commit_date}")
+    local extra
+    for extra in "$@"; do
+        [ -n "${extra}" ] && message_args+=(-m "${extra}")
+    done
+
+    if ! git commit "${message_args[@]}"; then
+        report_status "Backup failed: git commit failed"
+        return 1
+    fi
+
+    if ! git push -v; then
+        report_status "Backup failed: git push could not reach the remote"
+        return 1
+    fi
+
+    report_status "Backup pushed to github successfully"
+    return 0
 }
 
-#grab_version
-push_config
-
-if [ $? -eq 0 ]; then
-	MSG="Pushing changes to github was successfull."
-	echo "VALUE_UPDATE:status=${MSG}"
-	exit 0
-else
-	MSG="Push changes to github failed!"
-	echo "VALUE_UPDATE:status=${MSG}"
-    exit 1
-fi
+push_config "$@"
+exit $?
