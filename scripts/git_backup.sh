@@ -69,7 +69,7 @@ push_config(){
   git push "git@github.com:d5aint/klipper_config.git"
 }
 
-grab_version
+#grab_version
 push_config
 
 if [ $? -eq 0 ]; then
