@@ -25,7 +25,6 @@ if [ -f "${BKDIR}/work/${DATE}_KLIPPER_FULL.tgz" ] ; then
 		rm "$PRINTER/${DATE}_KLIPPER_FULL.tgz"
 	fi
 	mv "${BKDIR}/work/${DATE}_KLIPPER_FULL.tgz" "${PRINTER}/${DATE}_KLIPPER_FULL.tgz"
-	sudo chown pi:pi $PRINTER/*
 fi
 
 rm -rf $BKDIR/work

@@ -25,7 +25,7 @@ function rebootCamera()
 	    DEV=$(lsusb | grep "$camera" | cut -d ':' -f1 | cut -d ' ' -f4)
 		NM=$(lsusb | grep "$camera" | cut -d ' ' -f9-12)
 
-        rbcm=$(sudo /home/pi/usbreset /dev/bus/usb/$BUS/$DEV)
+        rbcm=$(sudo /usr/local/sbin/usbreset /dev/bus/usb/$BUS/$DEV)
 		if [[ $rbcm == *"Reset successful"* ]]; then
 		    ERROR=0
 			MSG="Camera '$camera' found on BUS: ${BUS} and successfully rebooted."
