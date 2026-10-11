@@ -1,0 +1,4 @@
+# Secrets / tokens — keep out of the backup repo (added 2026-08-28, hardening P2-09)
+moonraker-obico.cfg
+moonraker.secrets
+*.secrets
