@@ -1,0 +1,107 @@
+[server]
+host = 127.0.0.1
+port = 7125
+max_upload_size = 1024
+klippy_uds_address = /home/pi/printer_data/comms/klippy.sock
+
+[file_manager]
+queue_gcode_uploads = True
+check_klipper_config_path = True
+enable_object_processing = True
+file_system_observer = inotify
+enable_observer_warnings = True
+enable_config_write_access = True
+
+[machine]
+provider = systemd_dbus
+shutdown_action = poweroff
+validate_service = True
+validate_config = True
+force_validation = False
+
+[data_store]
+temperature_store_size = 1200
+gcode_store_size = 1000
+
+[job_queue]
+load_on_startup = False
+automatic_transition = False
+
+[announcements]
+dev_mode = False
+
+[authorization]
+trusted_clients = 
+	127.0.0.0/8
+	::1/128
+	192.168.1.90/32
+cors_domains = 
+	http://klipper.local
+	http://klipper
+	http://192.168.1.25
+	*://localhost
+	*://localhost:*
+
+[octoprint_compat]
+
+[history]
+
+[update_manager]
+enable_auto_refresh = True
+refresh_interval = 48
+enable_system_updates = True
+enable_packagekit = True
+channel = dev
+
+[update_manager mainsail]
+type = web
+channel = stable
+path = /home/pi/mainsail
+repo = mainsail-crew/mainsail
+persistent_files = 
+	config.json
+
+[update_manager crowsnest]
+type = git_repo
+path = /home/pi/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+primary_branch = v5
+managed_services = crowsnest
+system_dependencies = system-dependencies.json
+virtualenv = /home/pi/crowsnest-env
+requirements = requirements.txt
+
+[update_manager mobileraker]
+type = git_repo
+path = /home/pi/mobileraker_companion
+origin = https://github.com/Clon1998/mobileraker_companion.git
+primary_branch = main
+managed_services = mobileraker
+install_script = scripts/install.sh
+virtualenv = /home/pi/mobileraker-env
+requirements = scripts/mobileraker-requirements.txt
+
+[update_manager klipper_tmc_autotune]
+type = git_repo
+channel = dev
+path = /home/pi/klipper_tmc_autotune
+origin = https://github.com/andrewmcgr/klipper_tmc_autotune.git
+primary_branch = main
+managed_services = klipper
+install_script = install.sh
+
+[update_manager voron-klipper-extensions]
+type = git_repo
+path = /home/pi/voron-klipper-extensions
+origin = https://github.com/d5aint/voron-klipper-extensions.git
+primary_branch = master
+install_script = install-extensions.sh
+managed_services = klipper
+
+[update_manager led_effect]
+type = git_repo
+path = /home/pi/klipper-led_effect
+origin = https://github.com/julianschill/klipper-led_effect.git
+managed_services = klipper
+is_system_service = True
+
