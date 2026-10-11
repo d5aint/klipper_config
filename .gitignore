@@ -2,3 +2,5 @@
 moonraker-obico.cfg
 moonraker.secrets
 *.secrets
+# Moonraker writes this copy whenever it edits moonraker.conf
+.moonraker.conf.bkp
